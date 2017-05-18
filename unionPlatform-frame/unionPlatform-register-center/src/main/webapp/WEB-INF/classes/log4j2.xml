@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="INFO">
+
+	<Properties>
+		<!-- 日志文件路径 -->
+		<Property name="filePath">/usr/local/yyxk/logs/register-center
+		</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<RollingFile name="RollingFileInfo" fileName="${filePath}/info.log"
+			filePattern="${filePath}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+			<!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+			<ThresholdFilter level="info" onMatch="ACCEPT"
+				onMismatch="DENY" />
+			<PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+			<Policies>
+				<!-- 新建文件的时间策略 -->
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy max="3000" />
+		</RollingFile>
+
+		<RollingFile name="RollingFileWarn" fileName="${filePath}/warn.log"
+			filePattern="${filePath}/$${date:yyyy-MM}/warn-%d{yyyy-MM-dd}-%i.log">
+			<ThresholdFilter level="warn" onMatch="ACCEPT"
+				onMismatch="DENY" />
+			<PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+			<Policies>
+				<!-- 新建文件的时间策略 -->
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+			<!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
+			<DefaultRolloverStrategy max="3000" />
+		</RollingFile>
+		<RollingFile name="RollingFileError" fileName="${filePath}/error.log"
+			filePattern="${filePath}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+			<ThresholdFilter level="error" onMatch="ACCEPT"
+				onMismatch="DENY" />
+			<PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n" />
+			<Policies>
+				<!-- 新建文件的时间策略 -->
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy max="3000" />
+		</RollingFile>
+
+	</Appenders>
+	<!--然后定义logger，只有定义了logger并引入的appender，appender才会生效 -->
+	<Loggers>
+		<!-- com.yyxk下的日志输出目的地 -->
+		<Logger name="com.yyxk" level="INFO" additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFileInfo" />
+			<AppenderRef ref="RollingFileWarn" />
+			<AppenderRef ref="RollingFileError" />
+		</Logger>
+		<!-- sql日志输出目的地 -->
+		<Logger name="druid.sql.Statement" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFileInfo" />
+			<AppenderRef ref="RollingFileWarn" />
+			<AppenderRef ref="RollingFileError" />
+		</Logger>
+		<Root level="ERROR">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFileInfo" />
+			<AppenderRef ref="RollingFileWarn" />
+			<AppenderRef ref="RollingFileError" />
+		</Root>
+	</Loggers>
+</Configuration>

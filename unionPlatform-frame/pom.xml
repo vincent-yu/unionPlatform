@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- unionPlatform父级依赖管理 -->
+	<parent>
+		<groupId>com.unionPlatform</groupId>
+		<artifactId>unionPlatform-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>unionPlatform-frame</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>
+		unionPlatform-frame提供整体架构中通用的部分
+	</description>
+	<packaging>pom</packaging>
+	<name>unionPlatform-frame</name>
+	<url>http://maven.apache.org</url>
+	
+	<properties>
+	<!-- unionPlatform-plugin版本 -->
+		<plugin.version>0.0.1-SNAPSHOT</plugin.version>
+	<!-- unionPlatform-frame版本 -->
+		<frame.version>0.0.1-SNAPSHOT</frame.version>
+	</properties>
+
+	<dependencies>
+		
+	</dependencies>
+
+
+	<!-- 依赖仓库地址
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<url>http://maven.nblow.cn/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	 -->
+	<!-- 插件仓库地址
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<url>http://maven.nblow.cn/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	 -->
+	<modules>
+		<module>unionPlatform-core</module>
+		<module>unionPlatform-config</module>
+		<module>unionPlatform-config-client</module>
+		<module>unionPlatform-register-center</module>
+		<module>unionPlatform-zuul</module>
+	</modules>
+
+
+	<!-- 配置git仓库，release插件使用
+	<scm>
+		<connection>scm:git:ssh://git@git.nblow.cn/yyxk/yyxk-frame.git</connection>
+		<url>scm:git:ssh://git@git.nblow.cn/yyxk/yyxk-frame.git</url>
+		<developerConnection>scm:git:ssh://git@git.nblow.cn/yyxk/yyxk-frame.git</developerConnection>
+		<tag>v1.0</tag>
+	</scm>
+	 -->
+	 
+</project>
