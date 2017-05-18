@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.unionPlatform</groupId>
+	<artifactId>unionPlatform-parent</artifactId>
+
+	<!-- 版本号通过release插件管理，子项目不添加版本， 使用父版本 $MAVEN_HOME/conf/settings.xml文件中，<servers>标签内部添加内容: 
+		<server> <id>deployment</id> <username>deployment</username> <password>rzkj131602</password> 
+		</server> 打包前先提交代码， 打包命令为 mvn release:prepare, mvn release:perform， 执行成功后：git仓库添加一个当前版本的tag 
+		本地仓库安装一个当前版本的pom/jar/war nexus仓库发布一个当前版本的pom/jar/war 当前pom文件版本+0.1 以上操作包括子项目 -->
+
+	<version>0.0.1-SNAPSHOT</version>
+	<name>unionPlatform-parent</name>
+	<packaging>pom</packaging>
+
+	<properties>
+		<!-- 重写mongo版本 -->
+		<mongodb.version>3.4.1</mongodb.version>
+		<!-- <maven.javadoc.skip>true</maven.javadoc.skip> -->
+	</properties>
+
+	<dependencyManagement>
+		<!-- 通过io.spring.platform管理依赖版本 -->
+		<dependencies>
+			<dependency>
+				<groupId>io.spring.platform</groupId>
+				<artifactId>platform-bom</artifactId>
+				<version>Athens-SR4</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- spring cloud版本依赖管理 -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Camden.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+
+	</dependencyManagement>
+
+	<!-- 引入spring boot -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.5.RELEASE</version>
+	</parent>
+
+	<dependencies>
+		<!-- spring boot统一依赖，剔除logback，使用log4j2来记录日志 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcpkix-jdk15on</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+
+
+	</dependencies>
+
+
+	<!-- 配置依赖的仓库地址
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<url>http://maven.nblow.cn/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	 -->
+	<!-- 配置插件的仓库地址
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<url>http://maven.nblow.cn/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	 -->
+	<!-- 发布管理
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Releases</name>
+			<url>http://192.168.2.11:8082/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://192.168.2.11:8082/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	 -->
+	<build>
+
+		<plugins>
+			<!-- 编译插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<!-- 发布插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<!-- 子项目 -->
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<tagNameFormat>v${project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
+
+
+			<!-- 定义一些必须遵守的配置 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-validate</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<!-- validate时检查 -->
+						<phase>validate</phase>
+						<configuration>
+							<rules>
+								<!-- 确保依赖版本都相同 -->
+								<!-- <dependencyConvergence /> -->
+								<!-- 不允许依赖Snapshot版本的包 -->
+								<!-- <requireReleaseDeps> <message>No Snapshots Allowed!</message> 
+									</requireReleaseDeps> -->
+								<!-- 当前工程不允许使用Snapsshot版本发布/打包/安装 -->
+								<!-- <requireReleaseVersion> <message>No Snapshots Allowed!</message> 
+									</requireReleaseVersion> -->
+								<bannedPlugins>
+									<!-- will only display a warning but does not fail the build. -->
+									<level>WARN</level>
+									<excludes>
+										<exclude>org.apache.maven.plugins:maven-verifier-plugin</exclude>
+									</excludes>
+									<message>Please consider using the maven-invoker-plugin
+										(http://maven.apache.org/plugins/maven-invoker-plugin/)!</message>
+								</bannedPlugins>
+								<bannedDependencies>
+									<!-- 检查传递依赖 -->
+									<searchTransitive>true</searchTransitive>
+									<!-- 不允许使用的包 -->
+									<!-- groupId:artifactId:version -->
+									<!-- groupId -->
+									<!-- *:artifactId -->
+									<excludes>
+										<exclude>c3p0:c3p0</exclude>
+									</excludes>
+								</bannedDependencies>
+								<requireMavenVersion>
+									<version>3.3.3</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<message>请使用JDK1.8</message>
+									<version>1.8</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+		</plugins>
+
+
+	</build>
+
+</project>
