@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.unionPlatform</groupId>
+		<artifactId>unionPlatform-plugin</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>unionPlatform-mq</artifactId>
+	<name>unionPlatform-mq</name>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+
+
+		<dependency>
+			<groupId>com.unionPlatform</groupId>
+			<artifactId>unionPlatform-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.unionPlatform</groupId>
+			<artifactId>unionPlatform-config-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
+		</dependency>
+
+
+		<!-- getui -->
+		<dependency>
+			<groupId>com.gexin.platform</groupId>
+			<artifactId>gexin-rp-sdk-http</artifactId>
+			<version>4.0.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gexin.platform</groupId>
+			<artifactId>gexin-rp-sdk-base</artifactId>
+			<version>4.0.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gexin.platform</groupId>
+			<artifactId>gexin-rp-sdk-template</artifactId>
+			<version>4.0.0.4</version>
+		</dependency>
+	</dependencies>
+	<description>mq中间件,使用rabbitmq</description>
+</project>

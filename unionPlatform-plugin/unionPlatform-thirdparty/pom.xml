@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.unionPlatform</groupId>
+    <artifactId>unionPlatform-plugin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>unionPlatform-thirdparty</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>unionPlatform-thirdparty</name>
+  
+  
+  <description>
+  	unionPlatform-thirdparty为第三方接口的包装模块，包含微信、企业号与钉钉
+  </description>
+  
+  <url>http://maven.apache.org</url>
+  <packaging>pom</packaging>
+  
+  <properties>
+		<!-- unionPlatform-plugin版本 -->
+		<plugin.version>0.0.1-SNAPSHOT</plugin.version>
+		<!-- unionPlatform-frame版本 -->
+		<frame.version>0.0.1-SNAPSHOT</frame.version>
+	</properties>
+	
+	<!-- 依赖仓库地址
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<url>http://maven.nblow.cn/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	 -->
+	<!-- 插件仓库地址
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<url>http://maven.nblow.cn/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+  	 -->
+  <dependencies>
+  
+  	<!-- http模块 -->
+  	<dependency>
+  		<groupId>com.unionPlatform</groupId>
+  		<artifactId>unionPlatform-http</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
+  </dependencies>
+  <modules>
+  	<module>unionPlatform-wechat-api</module>
+    <module>unionPlatform-qyh-api</module>
+    <module>unionPlatform-ddtalk-api</module>
+  </modules>
+</project>

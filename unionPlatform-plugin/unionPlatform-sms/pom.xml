@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.unionPlatform</groupId>
+    <artifactId>unionPlatform-plugin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>unionPlatform-sms</artifactId>
+  <name>unionPlatform-sms</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>com.unionPlatform</groupId>
+      <artifactId>unionPlatform-http</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.unionPlatform</groupId>
+      <artifactId>unionPlatform-config-client</artifactId>
+      <version>${frame.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.unionPlatform</groupId>
+      <artifactId>unionPlatform-mq</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    
+  </dependencies>
+</project>

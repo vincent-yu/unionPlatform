@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.unionPlatform</groupId>
+		<artifactId>unionPlatform-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>unionPlatform-plugin</artifactId>
+	<packaging>pom</packaging>
+	<name>unionPlatform-plugin</name>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<description>
+		unionPlatform-plugin提供中间件及其他常用的一些功能
+	</description>
+
+
+	<url>http://maven.apache.org</url>
+	<properties>
+		<!-- unionPlatform-plugin版本 -->
+		<plugin.version>0.0.1-SNAPSHOT</plugin.version>
+		<!-- unionPlatform-frame版本 -->
+		<frame.version>0.0.1-SNAPSHOT</frame.version>
+	</properties>
+
+	<!-- 依赖仓库地址
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<url>http://maven.nblow.cn/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	 -->
+	<!-- 插件仓库地址
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<url>http://maven.nblow.cn/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	 -->
+	<dependencies>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.6</version>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>unionPlatform-http</module>
+		<module>unionPlatform-memcached</module>
+		<module>unionPlatform-mq</module>
+		<module>unionPlatform-thirdparty</module>
+		<module>unionPlatform-redis</module>
+		<module>unionPlatform-mongo</module>
+    	<module>unionPlatform-sms</module>
+  </modules>
+</project>
